@@ -5,11 +5,17 @@
              xmlns:local="clr-namespace:App1"
              x:Class="App1.MainPage">
 
-    <StackLayout>
+    <StackLayout BackgroundColor="#FFBF00" Padding="30" Spacing="30">
+        <Image Source="correioslogo.png" x:Name="imgLogo">
+            
+        </Image>
+        <Entry Placeholder="Digite o cep" PlaceholderColor="#FFBF00" BackgroundColor="#FFFFFF" x:Name="txtCep"></Entry>
+        <Button x:Name="btnBuscar" Text="BUSCAR CEP" TextColor="White" BackgroundColor="#00416b"></Button>
+        
         <!-- Place new controls here -->
-        <Label Text="Bem vindo to Xamarin.Forms!" 
+        <Label Text="" 
            HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+           VerticalOptions="Center" x:Name="lblTexto" />
     </StackLayout>
     
     
