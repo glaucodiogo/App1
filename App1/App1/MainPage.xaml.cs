@@ -15,17 +15,41 @@ namespace App1
         {
             InitializeComponent();
 
-            
+            btnBuscar.Clicked += BuscarCep;
         }
 
         private void BuscarCep(object sender,EventArgs args)
         {
-            //logica
-            string cep = txtCep.Text.Trim();
-            //validacao
-            Endereco end = ViaCepServico.BuscarEnderecoViaCEP(cep);
+            string cepFormat = txtCep.Text.Trim();
 
-            lblTexto.Text = string.Format("Endereço: {0},{1} {2}", end.Localidade, end.Logradouro, end.Uf);
+            if (IsValid(cepFormat))
+            {
+                Endereco end = ViaCepServico.BuscarEnderecoViaCEP(cepFormat);
+
+                lblTexto.Text = string.Format("Endereço: {0},{1} {2}", end.Localidade, end.Logradouro, end.Uf);
+            }
+                        
+        }
+
+
+        private bool IsValid(string cep)
+        {
+            bool valido = true;
+
+            if(cep.Length != 8)
+            {
+                DisplayAlert("ERRO", "CEP inválido! O CEP deve conter 8 caracteres.", "OK");
+                valido = false;
+            }
+            int novoCep = 0;
+            if (!int.TryParse(cep,out novoCep))
+            {
+                DisplayAlert("ERRO", "CEP inválido! OCEP deve ser composto apenas por números.","OK");
+                valido = false;
+            }
+
+
+            return valido;
         }
     }
 }
