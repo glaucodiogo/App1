@@ -20,7 +20,15 @@ namespace App1.Service
 
             Endereco end = JsonConvert.DeserializeObject<Endereco>(conteudo);
 
-            return end;
+            if(end.Cep == null)
+            {
+                return null;
+            }
+            else
+            {
+                return end;
+
+            }
 
         }
     }

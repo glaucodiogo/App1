@@ -24,9 +24,26 @@ namespace App1
 
             if (IsValid(cepFormat))
             {
-                Endereco end = ViaCepServico.BuscarEnderecoViaCEP(cepFormat);
+                try
+                {
+                    Endereco end = ViaCepServico.BuscarEnderecoViaCEP(cepFormat);
 
-                lblTexto.Text = string.Format("Endereço: {0},{1} {2}", end.Localidade, end.Logradouro, end.Uf);
+                    if(end != null)
+                    {
+                        lblTexto.Text = string.Format("Endereço: {0},{1} {2}", end.Localidade, end.Logradouro, end.Uf);
+                    }
+                    else
+                    {
+                        DisplayAlert("ERRO", "O endereço não foi encontrado para este cep:"+cepFormat, "OK");
+                    }
+                    
+                }
+                catch (Exception e)
+                {
+                    DisplayAlert("Erro Crítico", e.Message,"OK");
+                    throw;
+                }
+               
             }
                         
         }
